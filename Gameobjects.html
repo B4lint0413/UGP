@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <script src="query.js"></script>
     <title>Unity Guide Page</title>
 </head>
 
@@ -21,7 +22,27 @@
     <div class="content">
         <iframe src="https://www.youtube.com/embed/uCA8Q3nwaz4" width="420" height="315"></iframe>
         <!-- Documentation -->
+        <div class="documentation">
+            <h2>Documentation</h3>
+            <p></p>
+        </div>
         <!-- Query -->
+        <div class="query">
+            <h2>Knowledge checking query</h3>
+            <div class="question">
+                <h3>With which component of a GameObject can you give it a visual part, like an image?</h3>
+                <select class="custom-select" id="K5">
+                    <option value="1">ImageEditor</option>
+                    <option value="2">SpriteRenderer</option>
+                    <option value="3">GameObjectImage</option>
+                </select>
+                <h3>How do you write <i>Hello World!</i> in the console?</h3>
+                <p><input type="text" id="imp4">"Hello World!");</p>
+                <h3>How do you create a new GameObject named <i>MyGameObject</i> from code?</h3>
+                <p><input type="text" id="imp5"> = <input type="text" id="imp6">("MyGameObject");</p>
+                <button class="btn btn-secondary" onclick="check(2)">Check all</button>
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

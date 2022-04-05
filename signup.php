@@ -17,11 +17,14 @@
             $result = mysqli_query($mysqli, $sql);
 
             if (mysqli_num_rows($result) == 1) {
-                echo "<p>Username is taken</p>";
+                header("Refresh:0");
+                echo "<script>alert('Username is taken');</script>";
                 exit();
             } else {
                 $sql_newacc = "insert into userdata (Username, Password, Progress) values ('".$uname."', '".$passwd."', '0')";
                 mysqli_query($mysqli, $sql_newacc);
+                echo "<script>alert('Successful registration! Now log in!')</script>";
+                header("Location: login.php");
                 exit();
             }
         }

@@ -17,7 +17,7 @@
             $result = mysqli_query($mysqli, $sql);
 
             if (mysqli_num_rows($result) == 1) {
-                echo "<p>Successful login!</p>";
+                header("Location: index.html");
                 exit();
             } else {
                 // echo "<p>Wrong password or username!</p>";
