@@ -2,9 +2,9 @@
     if (isset($_POST["submit"])) {
 
         $host = "us-cdbr-east-05.cleardb.net";
-        $user = "bd88d17e743092";
-        $password = "224ac2fe";
-        $db = " heroku_c8dbe50d0c9829c ";
+        $user = "b22cd095417ef4";
+        $password = "7513ff98";
+        $db = " heroku_462ab0de7635101 ";
 
         $mysqli = mysqli_connect($host, $user, $password);
         mysqli_select_db($mysqli, $db);
