@@ -1,10 +1,10 @@
 <?php
     if (isset($_POST["submit"])) {
 
-        $host = "localhost";
-        $user = "root";
-        $password = "";
-        $db = "ugp";
+        $host = "us-cdbr-east-05.cleardb.net";
+        $user = "bd88d17e743092";
+        $password = "224ac2fe";
+        $db = " heroku_c8dbe50d0c9829c ";
 
         $mysqli = mysqli_connect($host, $user, $password);
         mysqli_select_db($mysqli, $db);
@@ -13,7 +13,7 @@
             $uname = $_POST["username"];
             $passwd = $_POST["password"];
 
-            $sql = "select * from userdata where Username='" . $uname . "'";
+            $sql = "select * from ugp where Username='" . $uname . "'";
             $result = mysqli_query($mysqli, $sql);
 
             if (mysqli_num_rows($result) == 1) {
@@ -21,7 +21,7 @@
                 echo "<script>alert('Username is taken');</script>";
                 exit();
             } else {
-                $sql_newacc = "insert into userdata (Username, Password, Progress) values ('".$uname."', '".$passwd."', '0')";
+                $sql_newacc = "insert into ugp (Username, Password, Progress) values ('".$uname."', '".$passwd."', '0')";
                 mysqli_query($mysqli, $sql_newacc);
                 echo "<script>alert('Successful registration! Now log in!')</script>";
                 header("Location: login.php");
