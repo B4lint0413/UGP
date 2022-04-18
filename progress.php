@@ -37,5 +37,19 @@
         //     }
         // }
     }
+    function getCurProg(){
+        $host = "us-cdbr-east-05.cleardb.net";
+        $user = "b22cd095417ef4";
+        $password = "7513ff98";
+        $db = " heroku_462ab0de7635101 ";
+
+        $mysqli = mysqli_connect($host, $user, $password);
+        mysqli_select_db($mysqli, $db);
+
+        include 'index.php';
+        
+        $sql = "SELECT `Progress` FROM `ugp` WHERE `Username`='".$uname."' AND `Password`='".$passwd."'";
+        return mysqli_query($mysqli, $sql);
+    }
 
 ?>

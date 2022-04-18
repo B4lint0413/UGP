@@ -16,8 +16,23 @@
     text-decoration: none;
 }
 
+.current{
+    background-color: darkgreen;
+    color: white;
+}
+
+.done{
+    background-color: green;
+    color: white;
+}
+
+.disabled{
+    background-color: grey;
+    color: black;
+}
+
 .sidebar a.active{
-    background-color: #04aa6d;
+    background-color: blue;
     color: white;
 }
 
