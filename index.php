@@ -17,7 +17,8 @@
             $result = mysqli_query($mysqli, $sql);
 
             if (mysqli_num_rows($result) == 1) {
-                header("Location: index.html");
+                // header("Location:progress.php?uname=usern&passwd=pass");
+                header("Location: Create.html");
                 exit();
             } else {
                 // echo "<p>Wrong password or username!</p>";
