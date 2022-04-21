@@ -29,6 +29,7 @@
 .disabled{
     background-color: grey;
     color: black;
+    cursor: not-allowed;
 }
 
 .sidebar a.active{

@@ -4,20 +4,20 @@
         $host = "us-cdbr-east-05.cleardb.net";
         $user = "b22cd095417ef4";
         $password = "7513ff98";
-        $db = " heroku_462ab0de7635101 ";
+        $db = "heroku_462ab0de7635101";
 
         $mysqli = mysqli_connect($host, $user, $password);
         mysqli_select_db($mysqli, $db);
 
         include 'index.php';
         
-        $sql = "SELECT `Progress` FROM `ugp` WHERE `Username`='".$uname."' AND `Password`='".$passwd."'";
+        $sql = "select `Progress` from `ugp` where `Username`='".$uname."' and `Password`='".$passwd."'";
         $db_progress = mysqli_query($mysqli, $sql);
         
         if ($db_progress == $progress-1) {
             $uname = $_POST["username"];
             $passwd = $_POST["password"];
-            $sql = "UPDATE `ugp` SET `Progress`='".$progress."' WHERE `Username`='".$uname."' AND `Password`='".$passwd."'";
+            $sql = "update `ugp` set `Progress`='".$progress."' where `Username`='".$uname."' and `Password`='".$passwd."'";
             mysqli_query($mysqli, $sql);
             header("Refresh:0");
         }else{
@@ -41,14 +41,16 @@
         $host = "us-cdbr-east-05.cleardb.net";
         $user = "b22cd095417ef4";
         $password = "7513ff98";
-        $db = " heroku_462ab0de7635101 ";
+        $db = "heroku_462ab0de7635101";
 
         $mysqli = mysqli_connect($host, $user, $password);
         mysqli_select_db($mysqli, $db);
 
         include 'index.php';
         
-        $sql = "SELECT `Progress` FROM `ugp` WHERE `Username`='".$uname."' AND `Password`='".$passwd."'";
+        echo "<p>test</p>";
+
+        $sql = "select `Progress` from `ugp` where `Username`='".$uname."' and `Password`='".$passwd."'";
         return mysqli_query($mysqli, $sql);
     }
 

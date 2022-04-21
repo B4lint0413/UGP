@@ -4,7 +4,7 @@
         $host = "us-cdbr-east-05.cleardb.net";
         $user = "b22cd095417ef4";
         $password = "7513ff98";
-        $db = " heroku_462ab0de7635101 ";
+        $db = "heroku_462ab0de7635101";
         
         $mysqli = mysqli_connect($host, $user, $password);
         mysqli_select_db($mysqli, $db);
@@ -24,7 +24,7 @@
                 $sql_newacc = "insert into ugp (Username, Password, Progress) values ('".$uname."', '".$passwd."', '0')";
                 mysqli_query($mysqli, $sql_newacc);
                 echo "<script>alert('Successful registration! Now log in!')</script>";
-                header("Location: login.php");
+                header("Location: index.php");
                 exit();
             }
         }
@@ -50,7 +50,7 @@
             <input type="password" name="password" placeholder="Password">
             <button type="submit" name="submit">Login</button>
         </form>
-        <a href="login.php">Do you have an account? Sign in!</a>
+        <a href="index.php">Do you have an account? Sign in!</a>
     </body>
 
     </html>
