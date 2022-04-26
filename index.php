@@ -1,4 +1,5 @@
 <?php
+    session_start();
     if (isset($_POST["submit"])) {
 
         $host = "us-cdbr-east-05.cleardb.net";
@@ -10,13 +11,13 @@
         mysqli_select_db($mysqli, $db);
 
         if (isset($_POST["username"])) {
-            $uname = $_POST["username"];
-            $passwd = $_POST["password"];
+            $_SESSION['uname'] = $_POST["username"];
+            $_SESSION['passwd'] = $_POST["password"];
 
-            $sql = "select * from ugp where Username='" . $uname . "' AND Password='" . $passwd . "'";
+            $sql = "select * from ugp where Username='" . $_SESSION['uname'] . "' AND Password='" . $_SESSION['passwd'] . "'";
             $result = mysqli_query($mysqli, $sql);
 
-            if (mysqli_num_rows($result) == 1) {
+            if (mysqli_num_rows($result) >= 1) {
                 // header("Location:progress.php?uname=usern&passwd=pass");
                 header("Location: Create.php");
                 exit();
