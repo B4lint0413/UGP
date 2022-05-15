@@ -2,7 +2,11 @@ import getCurProg from progress.php;
 import Progress from progress.php;
 
 var currentProg = getCurProg();
-var pages = document.getElementsByClassName("sidebar").getElementsByTagName("a");
+var sidebar = document.getElementsByClassName("sidebar");
+var pages = sidebar.getElementsByTagName("a");
+
+console.log(currentProg);
+console.log(pages);
 
 for (const page in pages) {
     if (page.name == currentProg){

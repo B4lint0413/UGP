@@ -26,15 +26,10 @@
     color: white;
 }
 
-.disabled{
-    background-color: grey;
-    color: black;
-    cursor: not-allowed;
-}
 
 .sidebar a.active{
-    background-color: blue;
-    color: white;
+    /* background-color: darkgreen; */
+    color: grey;
 }
 
 .sidebar a:hover:not(.active){
@@ -48,3 +43,10 @@ div.content{
     height: 1000px;
 }
 
+.disabled{
+    pointer-events: none;
+    cursor: default;
+    background-color: rgb(66, 66, 66);
+    color: darkslategrey;
+    
+}
