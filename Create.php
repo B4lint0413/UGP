@@ -2,48 +2,36 @@
     <html lang="en">
 
     <head>
-        <!-- <meta charset="UTF-8"> -->
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
-        <!-- <script src="query.js"></script> -->
         <title>Unity Guide Page</title>
     </head>
 
     <body>
         <script>
+            // It gets called on every reload from PHP with the DB current progress
             function start(currentProg) {
-                // var sidebar = document.getElementsByClassName("sidebar");
                 var pages = document.getElementsByClassName("pages");
-                // console.log(currentProg);
 
                 for (i = 0; i < pages.length; i++) {
-                    console.log(pages[i].id);
                     if (parseInt(pages[i].id) == currentProg) {
                         pages[i].classList.add("current");
-                        console.log("active");
                     } else if (parseInt(pages[i].id) < currentProg) {
                         pages[i].classList.add("done");
-                        console.log("done");
                     } else {
                         pages[i].classList.add("disabled");
-                        console.log("disabled");
                     }
                     // Adding classes doesnt work yet (it works finally)
                 }
             }
 
+            //It gets called on button click, it checkes whether user answered well, and reloads page with proper JQUERY run value
             function check(question) {
-                // Delete last run value (from now it is deleted from the php part)
-                // console.log(window.location.replace("&run=1",""));
-                // location.assign(window.location.replace("&run=1","")); //href is needed for value, because replace cant handle window location 
-                // location.assign(window.location.replace("&run=0",""));
+                // Delete last run value (from now it is being deleted from the php part)
                 if (question == 0) {
                     if (document.getElementById("imp1").value == "string" && document.getElementById("imp2").value == "public" && document.getElementById("imp3").value == "=5f;" && document.getElementById("K1").value == "3") {
-                        console.log(window.location.href.replace("%22", ""));
-                        // alert("You answered well! Keep going!");
-                        //Alert reloads current page??
-                        // window.location.href = window.location+"&run=1";
                         location.assign(window.location + "&run=1");
                     } else {
                         alert("Unfortunately you missed something! Try again!");
@@ -90,6 +78,7 @@
                                 <option value="2">Right-click on the files section and select what you want.</option>
                                 <option value="3">Both of the methods above works well.</option>
                             </select>
+                            <!-- It doesnt reload the page, just call JS check func which reloads with keep JQUERY -->
                             <button type="button" class="btn btn-secondary" name="button" onclick="check(0)">Check all</button>
                             <!-- Not submit just classic button doesnt reload the page, so php code doesn't run again -->
                         </div>
@@ -102,10 +91,8 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
         <?php
-        // session_start();
+        // Runs on reload when JS checking happened and act according to the JQUERY run's value
         ob_start();
-        // function Progress($progress)
-        // {
         if (isset($_GET["run"])) {
             $host = "us-cdbr-east-05.cleardb.net";
             $user = "b22cd095417ef4";
@@ -115,16 +102,9 @@
             $mysqli = mysqli_connect($host, $user, $password);
             mysqli_select_db($mysqli, $db);
 
-            // include 'index.php';
-
-            // global $uname;
-            // global $passwd;
-
             $sql = "select `Progress` from `ugp` where `Username`='" . $_GET['user'] . "' and `Password`='" . $_GET['pass'] . "'";
             $db_progress = mysqli_fetch_array(mysqli_query($mysqli, $sql))[0];
-            // echo "<script>console.log('" . $db_progress . "');</script>";
             $progress = 1; //the number of the progress where we get if we answer correctly (different in each page)
-            // echo "<script>console.log(". $_GET['run'] .");</script>";
 
             if ($_GET["run"] == 1) {
                 if ($db_progress == $progress - 1) {
@@ -132,32 +112,14 @@
                     $sql_result = mysqli_query($mysqli, $sql);
 
                     // Refresh the page with no run values to avoid running this part so getting the else branch on reload (replace doesnt work)
-                    // echo "<script>console.log(". str_replace('&run=1', '', $_SERVER['QUERY_STRING']) . ");</script>";
-                    // echo "<script>console.log(". $_SERVER['HTTP_HOST'] .");</script>"; //Turned out that this gives us just localhost:8000, so that's the problem
                     echo "<script>location.assign('http://" . $_SERVER['HTTP_HOST']."/Images.php?".str_replace("&run=1", "", $_SERVER['QUERY_STRING']) . "')</script>";//Enter the next page here; we use JS here because PHP had problem with modifying header
-                    // header("Location:".$_SERVER['HTTP_HOST'].$_SERVER['HTTP_URl']."");
                 } else {
-                    // echo "<script>console.log(". str_replace('&run=1', '', $_SERVER['QUERY_STRING']) .");</script>";
                     echo "<script>alert('You have solved the task well, but you are more forward with the progress!')</script>";
                     echo "<script>location.assign('http://" . $_SERVER['HTTP_HOST']."/Create.php?".str_replace("&run=0", "", $_SERVER['QUERY_STRING']) . "')</script>";
                 }
             }
         }
-        //     if (mysqli_num_rows($result) == 1) {
-        //         header("Refresh:0");
-        //         echo "<script>alert('Username is taken');</script>";
-        //         exit();
-        //     } else {
-        //         $sql_newacc = "insert into ugp (Username, Password, Progress) values ('".$uname."', '".$passwd."', '0')";
-        //         mysqli_query($mysqli, $sql_newacc);
-        //         echo "<script>alert('Successful registration! Now log in!')</script>";
-        //         header("Location: login.php");
-        //         exit();
-        //     }
-        // }
-        // }
-        // function getCurProg()
-        // {
+        // Checks the current progress and modifies sidebar classes with JS start func; it runs on every reload
         $host = "us-cdbr-east-05.cleardb.net";
         $user = "b22cd095417ef4";
         $password = "7513ff98";
@@ -166,15 +128,10 @@
         $mysqli = mysqli_connect($host, $user, $password);
         mysqli_select_db($mysqli, $db);
 
-        // echo "<script>alert('I dont get it');</script>";
-
         $sql = "select Progress from ugp where `Username`='" . $_GET['user'] . "' AND `Password`='" . $_GET['pass'] . "'";
         $result = mysqli_query($mysqli, $sql);
         $row = mysqli_fetch_array($result);
-        // echo "<script>console.log(" . $row[0] . ")</script>";
         echo "<script>start(" . $row[0] . ");</script>";
-        // echo "<script>console.log(" . $_GET['user'] . ")</script>";
-        // }
         ?>
     </body>
 
