@@ -35,6 +35,7 @@
                 } else {
                     alert("Unfortunately you missed something! Try again!");
                 }
+                // run=0 isnt needed
             }
         </script>
 
@@ -63,19 +64,10 @@
                 <form action="Create.php" method="post">
                     <h2>Knowledge checking query</h3>
                         <div class="question">
-                            <h3>Complete the code line to define a string variable with the name <i>itIsString</i>!</h3>
-                            <p><input type="text" id="imp1"> ItIsString;</p>
-                            <h3>Complete the code line to define a PUBLIC float varible with the name <i>itIsFloat</i> with
-                                value of 5!</h3>
-                            <p><input type="text" id="imp2"> float itIsFloat <input type="text" id="imp3"></p>
-                            <h3>How do create a GameObject, a Material, a Script or a Scene?</h3>
-                            <select class="custom-select" id="K1">
-                                <option value="1">Define them from code.</option>
-                                <option value="2">Right-click on the files section and select what you want.</option>
-                                <option value="3">Both of the methods above works well.</option>
-                            </select>
+                            <!-- Questions -->
+
                             <!-- It doesnt reload the page, just call JS check func which reloads with keep JQUERY -->
-                            <button type="button" class="btn btn-secondary" name="button" onclick="check()">Check all</button>
+                            <button type="button" class="btn btn-secondary" name="button" onclick="check()">Check all</button><!-- check value doesnt needed(there is just one query here) -->
                             <!-- Not submit just classic button doesnt reload the page, so php code doesn't run again -->
                         </div>
                 </form>
@@ -111,7 +103,7 @@
                     echo "<script>location.assign('http://" . $_SERVER['HTTP_HOST'] . "/Images.php?" . str_replace("&run=1", "", $_SERVER['QUERY_STRING']) . "')</script>"; //Enter the next page here; we use JS here because PHP had problem with modifying header
                 } else {
                     echo "<script>alert('You have solved the task well, but you are more forward with the progress!')</script>";
-                    echo "<script>location.assign('http://" . $_SERVER['HTTP_HOST'] . "/Create.php?" . str_replace("&run=0", "", $_SERVER['QUERY_STRING']) . "')</script>";
+                    echo "<script>location.assign('http://" . $_SERVER['HTTP_HOST'] . "/Create.php?" . str_replace("&run=0", "", $_SERVER['QUERY_STRING']) . "')</script>"; //Enter here current page
                 }
             }
         }
